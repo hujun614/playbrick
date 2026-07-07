@@ -11,19 +11,22 @@ export class Ball extends Phaser.Physics.Arcade.Image {
     super(scene, x, y, RES_KEY.BALL);
     scene.add.existing(this);
     scene.physics.add.existing(this);
+  }
 
+  /**
+   * 从对象池取出并投入使用。
+   * 物理属性在此处统一配置：加入 Arcade.Group 会用组默认值重置 body
+   * （bounce=0、collideWorldBounds=false），因此必须在入组后（launch 时）再设置。
+   */
+  launch(x: number, y: number, vx: number = GAME_VALUE.BALL_SPEED_X, vy: number = GAME_VALUE.BALL_SPEED_Y): void {
+    this.enableBody(true, x, y, true, true);
     const body = this.body as Phaser.Physics.Arcade.Body;
     body.setCircle(GAME_VALUE.BALL_RADIUS);
     body.setBounce(1, 1);
     body.setCollideWorldBounds(true);
     // 顶部/左右反弹，底部不反弹（掉落扣血）
     body.onWorldBounds = true;
-  }
-
-  /** 从对象池取出并投入使用 */
-  launch(x: number, y: number, vx: number = GAME_VALUE.BALL_SPEED_X, vy: number = GAME_VALUE.BALL_SPEED_Y): void {
-    this.enableBody(true, x, y, true, true);
-    (this.body as Phaser.Physics.Arcade.Body).setVelocity(vx, vy);
+    body.setVelocity(vx, vy);
   }
 
   /** 回收：隐藏并停止物理 */
