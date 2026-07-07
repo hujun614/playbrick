@@ -1,0 +1,20 @@
+{
+  "name": "pixel-brick-impact",
+  "version": "1.0.0",
+  "description": "像素砖块冲击 - Phaser 3 + Vite + TypeScript 抖音竖屏小游戏",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "phaser": "^3.80.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11"
+  }
+}
